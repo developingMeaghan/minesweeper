@@ -8,7 +8,7 @@ var board = {
       col:0,
       isMine: false,
       hidden: true,
-      surroundingMines: countSurroundingMines,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -16,7 +16,7 @@ var board = {
       col:1,
       isMine: false,
       hidden: true,
-      surroundingMines: countSurroundingMines,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -24,7 +24,7 @@ var board = {
       col:2,
       isMine: false,
       hidden: true,
-      surroundingMines: countSurroundingMines,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -32,6 +32,7 @@ var board = {
       col:3,
       isMine: true,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -39,6 +40,7 @@ var board = {
       col:0,
       isMine: true,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -46,6 +48,7 @@ var board = {
       col:1,
       isMine: true,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -53,6 +56,7 @@ var board = {
       col:2,
       isMine: false,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -60,6 +64,7 @@ var board = {
       col:3,
       isMine: false,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -67,6 +72,7 @@ var board = {
       col:0,
       isMine:false,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -74,6 +80,7 @@ var board = {
       col:1,
       isMine: true,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -81,6 +88,7 @@ var board = {
       col:2,
       isMine:false,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -88,6 +96,7 @@ var board = {
       col:3,
       isMine:false,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -95,6 +104,7 @@ var board = {
       col:0,
       isMine:false,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -102,6 +112,7 @@ var board = {
       col:1,
       isMine: true,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -109,6 +120,7 @@ var board = {
       col:2,
       isMine:false,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
     {
@@ -116,6 +128,7 @@ var board = {
       col:3,
       isMine:false,
       hidden: true,
+      surroundingMines: (countSurroundingMines),
       //...
     },
 
@@ -125,9 +138,9 @@ var board = {
 
 function startGame () {
 
-  board.foreach(function (countSurroundingMines){
-
-  })
+  for (var i = 0; i < board.cells.length; i++){
+    board.cells[i].surroundingMines = countSurroundingMines(board.cells[i]);
+}
 
   // Don't remove this function call: it makes the game work!
   lib.initBoard()
@@ -152,6 +165,15 @@ function checkForWin () {
 //
 // It will return cell objects in an array. You should loop through 
 // them, counting the number of times `cell.isMine` is true.
-function countSurroundingMines (cell) {
-}
 
+
+function countSurroundingMines (cell) {
+  var countMines = 0;   //creating loop
+  var surroundingCells = lib.getSurroundingCells(cell.row, cell.col)  //accessing array
+  for (var i = 0; i < surroundingCells.length; i++){  // if surronding cells is mine add 1 
+    if (surroundingCells[i].isMine === true){   // counts if is mine
+      countMines++;
+    }
+  }
+  return countMines; 
+}
